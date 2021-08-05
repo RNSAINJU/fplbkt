@@ -27,6 +27,28 @@ class HomeView(TemplateView):
         }
         return render(request,self.template_name,args)
 
+class RewardsView(TemplateView):
+    template_name='newtemplate/rewards.html'
+
+    def get(self,request):
+        company=get_object_or_404(Company, id=1)
+        teams=Teams.objects.all()
+        args={
+            'company':company,
+        }
+        return render(request,self.template_name,args)
+
+class RulesView(TemplateView):
+    template_name='newtemplate/rules.html'
+
+    def get(self,request):
+        company=get_object_or_404(Company, id=1)
+        teams=Teams.objects.all()
+        args={
+            'company':company,
+        }
+        return render(request,self.template_name,args)
+
 # standing results
 # class TeamView(TemplateView):
 #     template_name='newtemplate/teams.html'

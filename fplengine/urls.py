@@ -11,6 +11,7 @@ urlpatterns = [
     path('division/<str:division>/', DivisionSelectionView.as_view(), name='divisionselection'),
     path('about',AboutView.as_view(),name='about'),
     path('rewards',RewardsView.as_view(),name='rewards'),
+    path('rewards',RulesView.as_view(),name='rewards'),
     path('gameweekwinner',GameweekWinnerView.as_view(),name='gameweekwinner'),
     path('classicleague',ClassicLeagueView.as_view(),name='classicleague'),
     path('divisionleague',DivisionView.as_view(),name='divisionleague'),
