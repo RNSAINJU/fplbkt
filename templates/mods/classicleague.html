@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block title %}Classsic League{% endblock %}
+{% block stylesheet %} 
+<style>
+  .division-text{
+    color: black;
+  }
+
+  #customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #customers td, #customers th {
+    border: 1px solid #00000;
+    padding: 8px;
+    color:black; !important
+  }
+  
+  #customers tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #customers tr:hover {background-color: #ddd;}
+  
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #b8d6b9;
+    color: white; !important
+    
+  </style>
+
+{% endblock%}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'newtemplate/css/bootstrap.css' %}">
+		<div id="colorlib-main">
+			<section class="ftco-section ftco-bread">
+				<div class="container">
+					<div class="row no-gutters slider-text justify-content-center align-items-center">
+	          <div class="col-md-8 ftco-animate">
+	            <h1 class="bread">Classic League</h1>
+	          </div>
+	        </div>
+				</div>
+			</section>
+
+     
+
+			<section class="ftco-section-3">
+
+  <p class="pl-8 pr-8 mb-4" style="text-indent: 50px">{{ company.classic_league_description }}</p>
+  
+  <div class="row">
+  <div class="col">
+
+      
+      <table id="customers">
+        <tr> 
+        <th>Position</th>
+        <th>Manager</th>
+        <th>Points</th>
+        <th>Total Points</th>
+        </tr>
+        {% for w in object_list %}
+        <tr>
+        <td>{{ w.position }}</td>
+        <td>{{ w.name.name }},<br>{{ w.name.teamname }}</td>
+        <td>{{ w.event_total }}</td>
+        <td>{{ w.total_points }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+  </div>
+
+</div>
+      
+
+    </section>
+
+
+      
+            </section>
+      
+             /* {% for obj in winner %}
+       {% if obj.name %}
+       <div  class="gwwinner" style="background: rgb(0,36,33);
+      background: linear-gradient(0deg, rgba(0,36,33,1) 0%, rgba(0,255,149,1) 100%, rgba(0,255,115,0.7987570028011204) 100%);"
+       */
+         /* <section class="ftco-section">
+            <div class="container">
+              <div class="row justify-content-center mb-2 pb-3">
+                <div
+                  class="col-md-7 heading-section heading-section-2 text-center ftco-animate"
+                >
+                  <h2 class="mb-4" style="padding-top:30px;">{{ obj.Year }} Season Winner</h2>
+                  <h1 class="mb-4">{{ obj.name }}</h2>
+                  <h2 class="mb-8" style="color:white;">{{ obj.voice }}</h2>
+                </div>
+              </div>
+              <div class="row no-gutters">
+                
+                
+              
+              </div>
+            </div>
+          </section> */
+      </div>
+                    {% endif %}
+                {% endfor %}
+{% include 'footer.html' %}
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+{% endblock %}
+{% block javascript %}{% endblock %}

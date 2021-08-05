@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %} Teams {% endblock %}
+{% block stylesheet %}
+
+ {% endblock %} 
+
+{% block content %}
+{% include 'nav.html' %}
+
+		<div id="colorlib-main">
+			<section class="ftco-section ftco-bread">
+				<div class="container">
+					<div class="row no-gutters slider-text justify-content-center align-items-center">
+	          <div class="col-md-8 ftco-animate">
+	            <h1 class="bread">FPL Bhaktapur Teams</h1>
+	          </div>
+	        </div>
+				</div>
+			</section>
+			<section class="ftco-section-3">
+				
+        <h1 class="text-center">{{ team.name }}</h1>
+        <h3 class="text-center">{{ team.teamname }}</h3>
+<table id="customers">
+  <tr>
+    <th>Gameweek</th>
+    <th>Points</th>
+  </tr>
+
+  {% for gw in gameweek.all %}
+  <tr>
+    <td>GW -{{ gw.no }}</td>
+    <td>{{ gw.point }}</td>
+  </tr>
+  {% endfor %}
+
+</table>
+
+			</section>
+
+       {% for obj in winner %}
+ {% if obj.name %}
+ <div  class="gwwinner" style="background: rgb(0,36,33);
+background: linear-gradient(0deg, rgba(0,36,33,1) 0%, rgba(0,255,149,1) 100%, rgba(0,255,115,0.7987570028011204) 100%);"
+
+   <section class="ftco-section">
+      <div class="container">
+        <div class="row justify-content-center mb-2 pb-3">
+          <div
+            class="col-md-7 heading-section heading-section-2 text-center ftco-animate"
+          >
+            <h2 class="mb-4" style="padding-top:30px;">{{ obj.Year }} Season Winner</h2>
+            <h1 class="mb-4">{{ obj.name }}</h2>
+            <h2 class="mb-8" style="color:white;">{{ obj.voice }}</h2>
+          </div>
+        </div>
+        <div class="row no-gutters">
+          
+          
+        
+        </div>
+      </div>
+    </section>
+</div>
+              {% endif %}
+          {% endfor %}
+	 
+			{% include 'footer.html' %}
+			
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+
+	{% endblock %} 
+
+	{% block javascript %}{% endblock %}

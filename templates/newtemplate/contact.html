@@ -1,0 +1,44 @@
+{% extends 'newtemplate/base.html' %} 
+{% load static %} 
+{% block style %} 
+<link rel=stylesheet type=text/css href="{% static 'newtemplate/css/tablestyle.css' %}">
+<style>
+    .heading-contact{
+        font-family: "Oswald", sans-serif;
+        color: #b81e2b;
+        font-size:18px !important; 
+        text-align: left !important;
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+
+    p{
+        font-family: "Oswald", sans-serif;
+    }
+</style>
+{% endblock %} 
+{% block content %}
+
+<section>
+
+    <h2 style=" margin-bottom:40px;" class="heading"> <span>Contact</span></span></h2>
+    <div class="row">
+        <div class="container">
+            <div class="col-md-3">
+                <h3 class="heading-contact">Address:</h3>
+                <p>{{ company.address }}</p>
+            </div>
+
+            <div class="col-md-3">
+                <h3 class="heading-contact">Phone:</h3>
+                <p>{{ company.phone_no }}</p>
+            </div>
+
+            <div class="col-md-3">
+                <h3 class="heading-contact">Facebook link:</h3>
+                <p>{{ company.fb_link }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

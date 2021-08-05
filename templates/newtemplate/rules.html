@@ -1,0 +1,56 @@
+{% extends 'newtemplate/base.html' %} 
+{% load static %} 
+{% block style %} 
+<link rel=stylesheet type=text/css href="{% static 'newtemplate/css/tablestyle.css' %}">
+<style>
+    .heading-2{
+        font-size:12px !important; 
+        text-align: left !important;
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+
+    .ruledescription{
+        margin-bottom: 30px !important;
+        text-align: justify;
+  text-justify: inter-word;
+  text-indent: 50px;
+    }
+</style>
+{% endblock %} 
+{% block content %}
+
+<section>
+<div class="row">
+    <div class="container">
+
+  <div class="col-xs">
+    <h2 style=" margin-bottom:40px;" class="heading"> <span>Rules</span></span></h2>
+
+    <h2 class="heading-2 heading"> <span> Classic</span>League</h2>
+    <p  class="ruledescription">{{ company.classic_league_description }}</p>
+
+    <h2  class="heading-2 heading"> <span>Ultimate League 1.0</span></h2>
+
+    <h2  class="heading-2 heading"> Gameweek<span>Winner</span></h2>
+    <p  class="ruledescription">{{ company.gameweek_winner_description }}</p>
+
+    <h2 class="heading heading-2 "> Division<span> League</span></h2>
+    <p  class="ruledescription">{{ company.division_description }}</p>
+
+    <h2 class="heading heading-2 "> Elimination<span> League</span></h2>
+    <p  class="ruledescription">{{ company.elimination_description }}</p>
+    <img class="rewardimage" src="{{company.elimination_image.url}}" alt="reward-image" width=100% height=850px>
+
+    <h2 class="heading heading-2"> <span>IamSafe</span></h2>
+    <p class="ruledescription">{{ company.iamsafe_description }}</p>
+    <img class="rewardimage" src="{{company.iamsafe_image.url}}" alt="reward-image" width=100% height=850px>
+
+    
+
+
+  </div>
+  </div>
+</div>
+</section>
+{% endblock %}

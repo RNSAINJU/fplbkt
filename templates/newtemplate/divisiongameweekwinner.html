@@ -1,0 +1,61 @@
+{% extends 'newtemplate/base.html' %}
+{% load static %}
+{% block style %}
+<link rel=stylesheet type=text/css href="{% static 'newtemplate/css/tablestyle.css' %}">
+ {% endblock %} 
+ 
+{% block content %}
+<section>
+
+    <!--for demo wrap-->
+    <h2 class=heading><span>Division</span>GameweekWinner</h2>
+    <div style="margin-top: 20px;;" class="tbl-header">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+          <tr>
+            <th>GW</th>           
+            <th>Division</th>
+            <th>Manager</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+            {% for winner in gwwinner %}
+            <tr>
+                <td style="color: #dbc570;" >GW-{{ winner.gameweek }}</td>
+                <td>{{ winner.team.divisions.name }}</td>
+                <td><a style="color: #dbc570;" href="">{{ winner.team.name }}</a></td>
+                <td>{{ winner.points }}</td>
+              </tr>
+           {% endfor %}
+          
+        </tbody>
+      </table>
+    </div>
+  </section>
+  
+  
+  <!-- follow me template -->
+  <div class="made-with-love">
+    Made with
+    <i>♥</i> by
+    <a target="_blank" href="https://codepen.io/nikhil8krishnan">Nikhil Krishnan</a>
+  </div>
+
+
+
+  {% endblock %}
+{% block script %}
+<script>
+// '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+{% endblock %}
+

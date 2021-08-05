@@ -1,0 +1,226 @@
+<!doctype html>
+{% load static %}
+<html class=no-js lang="">
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<head>
+    <meta charset=utf-8>
+    <meta name=description content="">
+    <meta name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    
+
+    
+    <link rel="shortcut icon" href="{% static 'newtemplate/favicon.ico'%}">
+    <link rel=stylesheet href="{% static 'newtemplate/css/vendor.css' %}">
+    <link rel=stylesheet href="{% static 'newtemplate/css/style.css' %}">
+    <link rel=stylesheet type=text/css href="{% static 'newtemplate/css/layerslider.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link href="path/to/font-awesome/css/font-awesome.min.css">
+    
+
+    <script src="{% static 'newtemplate/js/vendor/modernizr.js' %}"></script>
+
+    {% block style %}
+
+{% endblock %}
+</head>
+
+<body id="bootstrap-overrides"><!--[if lt IE 10]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div class=wrapper>
+    <header class=header-main>
+        {% comment %} <div class=header-upper>
+            <div class=container>
+                <div class=row>
+                    <ul>
+                        <li><a href="#">Signup/login</a></li>
+                        <li><a href=shopcart.html><i class="fa fa-shopping-cart"></i> <span>cart(<span
+                                class=cartitems>0</span>)</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        <div class="header-lower clearfix">
+            <div class=container>
+                <div class=row><h1 class=logo><a href="{% url 'cv:home' %}"><img src="{% static 'images/logo2.png' %}" alt=image></a></h1>
+
+                    <div class=menubar>
+                        <nav class=navbar>
+                            <div class=nav-wrapper>
+                                <div class=navbar-header>
+                                    <button type=button class=navbar-toggle><span class=sr-only>Toggle navigation</span>
+                                        <span class=icon-bar></span></button>
+                                </div>
+                                <div class=nav-menu>
+                                    <ul class="nav navbar-nav menu-bar">
+                                        <li><a href="{% url 'cv:home' %}" class=active>Home <span></span> <span></span>
+                                            <span></span> <span></span></a></li>
+                                        <li><a href="{% url 'cv:teams' %}">Teams <span></span> <span></span> <span></span>
+                                            <span></span></a></li>
+                                        <li><a>Game Mods<span></span> <span></span> <span></span> <span></span></a>
+                                            <ul class=sub-menu>
+                                                <li><a href="{% url 'cv:classicleague' %}">Classic League</a></li>
+                                                <li><a href="{% url 'cv:gameweekwinner' %}">Gameweek Winner</a></li>
+                                                <li><a href="{% url 'cv:divisionleague' %}">Division League</a></li>
+                                                <!-- <li><a href="{% url 'cv:divisiongameweekwinner' %}">Division Gameweek Winner</a></li> -->
+                                                <!-- <li><a href="{% url 'cv:eliminationleague' %}">Elimination League</a></li> -->
+                                                <li><a href="{% url 'cv:iamsafe' %}">I am Safe</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="{% url 'cv:rewards' %}">Rewards <span></span> <span></span> <span></span>
+                                            <span></span></a></li>
+                                        <li><a href="{% url 'cv:rules' %}">Rules  <span></span> <span></span>
+                                            <span></span> <span></span></a></li>
+                                        <!-- <li><a href="{% url 'cv:about' %}">About  <span></span> <span></span>
+                                            <span></span> <span></span></a></li> -->
+                                        <li><a href="{% url 'cv:contact' %}">contact <span></span> <span></span> <span></span>
+                                            <span></span></a></li>
+                                        <!-- <li><a>error <span></span> <span></span> <span></span> <span></span></a>
+                                            <ul class=sub-menu>
+                                                <li><a href=400.html>400 page</a></li>
+                                                <li><a href=401.html>401 page</a></li>
+                                                <li><a href=403.html>403 page</a></li>
+                                                <li><a href=404.html>404 page</a></li>
+                                                <li><a href=500.html>500 page</a></li>
+                                                <li><a href=503.html>503 page</a></li>
+                                            </ul>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <!-- <div class=social><a href="{{ company.fb_link }}" class=facebook><i
+                            class="fa fa-plus-circle"></i></a> <a href=https://twitter.com/itobuztech class=twitter><i
+                            class="fa fa-twitter"></i></a> <a href=https://www.behance.net/ class=behance><i
+                            class="fa fa-behance"></i></a></div>
+                </div> -->
+            </div>
+        </div>
+    </header>
+    {% block content %}
+    {% endblock %}
+
+
+  <footer class=footer-type01>
+        <div class=container>
+            <div class=row>
+                <ul class=footer-widget>
+                    <li class=widget-about><h4 class=footerheading>about <span>soccer club</span></h4>
+
+                        <p>{{ company.description }}</p>
+
+                        <p><span class=uppercaseheading>address:</span> {{ company.address }}</p>
+
+                        <p><span class=uppercaseheading>call:</span> <span class=red>{{ company.phone_no }}</span></p></li>
+                    <li class=widget-news><h4 class=footerheading>recent <span>news</span></h4>
+                        <!-- <ul class="widget-newsdetails clearfix">
+                            <li class=clearfix><a href="#" class=clearfix>
+                                <div class=widget-pic
+                                     style="background:url(images/widget/widget01.jpg) center no-repeat"></div>
+                                <div class=widget-newsinfo><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Numquam soluta excepturi.</p>
+
+                                    <p class=uppercaseheading>18 september ,<span class=red>2015</span></p></div>
+                            </a></li>
+                            <li class=clearfix><a href="#" class=clearfix>
+                                <div class=widget-pic
+                                     style="background:url({% static 'newtemplate/images/widget/widget02.jpg' %}) center no-repeat"></div>
+                                <div class=widget-newsinfo><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Numquam soluta excepturi.</p>
+
+                                    <p class=uppercaseheading>18 september ,<span class=red>2015</span></p></div>
+                            </a></li>
+                            <li class=clearfix><a href="#" class=clearfix>
+                                <div class=widget-pic
+                                     style="background:url(images/widget/widget03.jpg) center no-repeat"></div>
+                                <div class=widget-newsinfo><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Numquam soluta excepturi.</p>
+
+                                    <p class=uppercaseheading>18 september ,<span class=red>2015</span></p></div>
+                            </a></li>
+                        </ul> -->
+                    </li>
+                    <!-- <li class=widget-product><h4 class=footerheading>real <span>soccer products</span></h4>
+                        <ul class=widget_productdetails>
+                            <li><a href=#>shoes(4)</a></li>
+                            <li><a href=#>men(4)</a></li>
+                            <li><a href=#>t-shirt(4)</a></li>
+                            <li><a href=#>sports(4)</a></li>
+                            <li><a href="#">glass</a></li>
+                        </ul>
+                    </li> -->
+                    <!-- <li class=widget-comment><h4 class=footerheading>recent <span>comments</span></h4>
+                        <ul class=widget_commentDetails>
+                            <li><a href=# class=clearfix>
+                                <div class=comment-pic>
+                                    <div class=columnpic><img src="{% static 'newtemplate/images/widget/comment01.jpg' %}" alt=image></div>
+                                </div>
+                                <div class=commentinfo><p class=uppercaseheading>jhon doe</p>
+
+                                    <p>18 April ,<span class=red>2015</span></p>
+
+                                    <p>nice and cool</p></div>
+                            </a></li>
+                            <li><a href=# class=clearfix>
+                                <div class=comment-pic>
+                                    <div class=columnpic><img src="{% static 'newtemplate/images/widget/comment02.jpg' %}" alt=image></div>
+                                </div>
+                                <div class=commentinfo><p class=uppercaseheading>jhon doe</p>
+
+                                    <p>18 April ,<span class=red>2015</span></p>
+
+                                    <p>nice and cool</p></div>
+                            </a></li>
+                            <li><a href=# class=clearfix>
+                                <div class=comment-pic>
+                                    <div class=columnpic><img src="{% static 'newtemplate/images/widget/comment03.jpg' %}"alt=image></div>
+                                </div>
+                                <div class=commentinfo><p class=uppercaseheading>jhon doe</p>
+
+                                    <p>18 April ,<span class=red>2015</span></p>
+
+                                    <p>nice and cool</p></div>
+                            </a></li> -->
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class=footer-type02>
+            <div class=container>
+                <div class=row><a href=index-2.html class=footer-logo><img src="{% static 'images/logo1.jpg' %}" alt=image></a>
+
+                    <!-- <div class=footer-container>
+                        <ul class=clearfix>
+                            <li><a href=https://www.facebook.com/templatespoint.net class=bigsocial-link><i
+                                    class="fa fa-facebook"></i></a></li>
+                            <li><a href=https://twitter.com/ class=bigsocial-link target=_blank><i
+                                    class="fa fa-twitter"></i></a></li>
+                            <li><a href=https://www.behance.net/ class=bigsocial-link target=_blank><i
+                                    class="fa fa-behance"></i></a></li>
+                        </ul>
+                        </div> -->
+                    <!-- <div class=footer-appstore>
+                        <figure><a href=#><img src="{% static 'newtemplate/images/appstore/apple.png' %}" alt=image></a></figure>
+                        <figure><a href=#><img src="{% static 'newtemplate/images/appstore/google.png' %}" alt=image></a></figure>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+</div>
+
+<script src="{% static 'newtemplate/js/vendor/vendor.js' %}"></script>
+<script src="{% static 'newtemplate/js/main.js' %}"></script>
+{% block script %}
+{% endblock%}
+</body>
+
+</html>

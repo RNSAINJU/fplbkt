@@ -1,0 +1,54 @@
+
+ {% if gwwinner %}
+ {% for obj in gwwinner %}
+ <div  class="gwwinner" style="background: rgb(0,36,33);
+background: linear-gradient(180deg, rgba(0,36,33,1) 0%, rgba(0,255,149,1) 100%, rgba(0,255,115,0.7987570028011204) 100%);>
+   <section class="ftco-section">
+      <div class="container">
+        <div class="row justify-content-center mb-2 pb-3">
+          <div
+            class="col-md-7 heading-section heading-section-2 text-center ftco-animate">
+            <h2 class="mb-4" style="color:white; padding-top:30px;">Gameweek Winner : {{ obj.no }}</h2>
+            <h1 class="mb-4">{{ obj.name }}</h2>
+            <h2 class="mb-4">{{ obj.name.teamname }}</h2>
+            <h2 class="mb-8" style:"float:right;">Points:{{ obj.points }}</h2>
+          </div>
+        </div>
+        <div class="row no-gutters">
+          
+          
+        
+        </div>
+      </div>
+    </section>
+</div>
+{% endfor %}
+{% endif %}
+
+
+          {% for obj in divisiongwwinner %}
+      
+          <div  class="gwwinner" style="background: rgb(0,36,33);
+         background: linear-gradient(180deg, rgba(0,36,33,1) 0%, rgba(0,255,149,1) 100%, rgba(0,255,115,0.7987570028011204) 100%);>
+            <section class="ftco-section">
+               <div class="container">
+                 <div class="row justify-content-center mb-2 pb-3">
+                   <div
+                     class="col-md-7 heading-section heading-section-2 text-center ftco-animate"
+                   >
+                     <h2 class="mb-4" style="color:white; padding-top:30px;">Division {{ obj.Division.name}} Gameweek Winner : {{ obj.Gameweek.no }}</h2>
+                     <h1 class="mb-4">{{ obj.Team.name }}</h2>
+                     <h2 class="mb-4">{{ obj.Team.teamname }}</h2>
+                     <h2 class="mb-8" style:"float:right;">Points:{{ obj.Points }}</h2>
+                   </div>
+                 </div>
+                 <div class="row no-gutters">
+                   
+                   
+                 
+                 </div>
+               </div>
+             </section>
+         </div>
+                       
+                   {% endfor %}

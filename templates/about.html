@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}About me{% endblock %}
+{% block stylesheet %} {% endblock%}
+
+{% block content %}
+{% include 'nav.html' %}
+
+		<div id="colorlib-main">
+			<section class="ftco-section-no-padding bg-light">
+				<div class="hero-wrap">
+					<div class="overlay"></div>
+					<div class="d-flex">
+						<div class="author-image text img p-md-5" style="background-image: url({{ company.image1.url }});">
+							
+						</div>
+						<div class="author-info text p-4 p-md-5 mt-5 mb-5">
+							<div class="desc">
+								<span class="subheading">Nice To Meet You</span>
+								<h1 class="big-letter">{{ company.name }}</h1>
+								<h1 class="mb-4"><span>Who we Are </span></h1>
+								 <p class="mb-4" style="text-indent: 50px;text-align: justify;">{{ company.description2 }}</p>
+								<h3 class="signature h1">{{ company.name }}</h3>
+								<ul class="ftco-social mt-3">
+		              {% comment %} <li class="ftco-animate">
+                  <a href="{{ user.profile.youtube_link }}"><span class="icon-youtube"></span></a>
+                </li> {% endcomment %}
+                <li class="ftco-animate">
+                  <a href="{{ company.fb_link }}"><span class="icon-facebook"></span></a>
+                </li>
+                {% comment %} <li class="ftco-animate">
+                  <a href="{{ user.profile.insta_link }}"><span class="icon-instagram"></span></a>
+				  </li>
+		            </ul> {% endcomment %}
+	            </div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_1.jpg);">
+	    	<div class="container">
+	    		<div class="row justify-content-start">
+	    			<div class="col-md-10">
+			    		<div class="row">
+			          <div class="col-xl-3 col-md-6 d-flex justify-content-center counter-wrap ftco-animate">
+			            <div class="block-18">
+			              <div class="text d-flex align-items-center">
+			                <strong class="number" data-number="2">0</strong>
+			                <span>Total season</span>
+			              </div>
+			            </div>
+			          </div>
+			          <div class="col-xl-3 col-md-6 d-flex justify-content-center counter-wrap ftco-animate">
+			            <div class="block-18">
+			              <div class="text d-flex align-items-center">
+			                <strong class="number" data-number="50">0</strong>
+			                <span>Participants</span>
+			              </div>
+			            </div>
+			          </div>
+			          {% comment %} <div class="col-xl-3 col-md-6 d-flex justify-content-center counter-wrap ftco-animate">
+			            <div class="block-18">
+			              <div class="text d-flex align-items-center">
+			                <strong class="number" data-number="200">0</strong>
+			                <span>Finished Photosessions</span>
+			              </div>
+			            </div>
+			          </div>
+			          <div class="col-xl-3 col-md-6 d-flex justify-content-center counter-wrap ftco-animate">
+			            <div class="block-18">
+			              <div class="text d-flex align-items-center">
+			                <strong class="number" data-number="200">0</strong>
+			                <span>Happy Clients</span>
+			              </div>
+			            </div>
+			          </div> {% endcomment %}
+			        </div>
+		        </div>
+	        </div>
+	    	</div>
+	    </section>
+
+
+{% include 'footer.html' %}
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+{% endblock %}
+{% block javascript %}{% endblock %}

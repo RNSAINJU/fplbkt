@@ -1,0 +1,70 @@
+{% extends 'newtemplate/base.html' %}
+{% load static %}
+{% block style %}
+<link rel=stylesheet type=text/css href="{% static 'newtemplate/css/tablestyle.css' %}">
+ {% endblock %} 
+ 
+{% block content %}
+<section>
+
+    <!--for demo wrap-->
+    <h2 class=heading>{{ team.name }} 
+      <br><span>{{ team.teamname }}</span></h2>
+    <div style="margin-top: 20px;" class="tbl-header">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+          <tr>
+            <th>Gameweek</th>
+            <th>Points</th>
+            <th>Point on Bench</th>
+            <th>Total points</th>
+            <th>Bank</th>
+            <th>Value</th>
+            <th>Transfer</th>
+            <th>Transfer Cost</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+          {% for gw in gameweek.all %}
+          <tr>
+            <td>GW -{{ gw.no }}</td>
+            <td>{{ gw.point }}</td>
+            <td>{{ gw.point_on_bench }}</td>
+            <td>{{ gw.totalpoints }}</td>
+            <td>{{ gw.bank }}</td>
+            <td>{{ gw.value }}</td>
+            <td>{{ gw.event_transfers }}</td>
+            <td>{{ gw.event_transfers_cost }}</td>
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
+    </div>
+  </section>
+  
+  
+  <!-- follow me template -->
+  <div class="made-with-love">
+    Made with
+    <i>♥</i> by
+    <a target="_blank" href="https://codepen.io/nikhil8krishnan">Nikhil Krishnan</a>
+  </div>
+
+
+
+  {% endblock %}
+{% block script %}
+<script>
+// '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+{% endblock %}
+

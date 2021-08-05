@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Gameweekwinner{% endblock %}
+{% block stylesheet %} 
+
+{% endblock%}
+
+{% block content %}
+{% include 'nav.html' %}
+
+		<div id="colorlib-main">
+			<section class="ftco-section ftco-bread">
+				<div class="container">
+					<div class="row no-gutters slider-text justify-content-center align-items-center">
+	          <div class="col-md-8 ftco-animate">
+	            <h1 class="bread">Gameweek Winner</h1>
+	          </div>
+	        </div>
+				</div>
+			</section>
+
+     
+
+			<section class="ftco-section-3">
+
+  <p class="pl-8 pr-8 mb-4" style="text-indent: 50px">{{ company.gameweek_winner_description }}</p>
+  
+  <div class="row">
+  <div class="col">
+
+      
+      <table id="customers">
+        <tr> 
+        <th>Gameweek</th>
+        <th> Manager</th>
+        <th>Points</th>
+        </tr>
+        {% for gw in gwwinner %}
+        <tr>
+        <td>{{ gw.gameweek }}</td>
+        <td>{% for names in gw.name.all %}{{ names.name }},{% endfor %}</td>
+        <td>{{ gw.points }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+  </div>
+
+</div>
+      
+
+    </section>
+
+
+      
+            </section>
+      
+   
+{% include 'footer.html' %}
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+{% endblock %}
+{% block javascript %}{% endblock %}

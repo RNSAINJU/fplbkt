@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block title %}Classsic League{% endblock %}
+{% block stylesheet %} 
+<style>
+  .elimination-table{
+    font-size: 8px;
+  }
+  </style>
+
+{% endblock%}
+
+{% block content %}
+{% include 'nav.html' %}
+
+		<div id="colorlib-main">
+			<section class="ftco-section ftco-bread">
+				<div class="container">
+					<div class="row no-gutters slider-text justify-content-center align-items-center">
+	          <div class="col-md-8 ftco-animate">
+	            <h1 class="bread">Elimination League</h1>
+	          </div>
+	        </div>
+				</div>
+			</section>
+
+      <section class="ftco-section instagram">
+      <div class="container">
+
+        <div class="row no-gutters">
+          
+          
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="{{ company.elimination_image.url }}" class="insta-img image-popup"
+              style="background-image: url( {{ company.elimination_image.url }} );">
+            
+              <div class="icon d-flex justify-content-center">
+                {% comment %} <span class="icon-instagram align-self-center"></span> {% endcomment %}
+              </div>
+            </a>
+          </div>
+        
+        </div>
+      </div>
+
+      
+    </section>    
+
+  <section class="ftco-section-3 elimination-table">
+
+
+      
+    <div class="row" style="margin-bottom: 30;">
+        <div class="col-3">
+          <table id="customers">
+            <tr>
+              <th> Division A </th>
+            </tr>
+          
+            {% for team in divisiona.team.all %} 
+            <tr>
+              {% if team.elimination == "eliminated" %}
+              <td style="background-color: brown; color: cornsilk;">{{ team.name }} | GW{{ team.eliminatedgameweek.no }} - {{ team.eliminatedwithpoints }} points </td>
+            {% else %}
+              <td>{{ team.name }}</td>
+            {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+
+        <div class="col-3">
+          <table id="customers">
+
+            <tr>
+            <th> {{ }} </th>
+            </tr>
+            {% for team in divisionb.team.all %} 
+            
+            <tr>
+              {% if team.elimination == "eliminated" %}
+              <td style="background-color: brown; color: cornsilk;">{{ team.name }} | GW{{ team.eliminatedgameweek.no }} - {{ team.eliminatedwithpoints }} points </td>
+            {% else %}
+              <td>{{ team.name }}</td>
+            {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+
+        </div>
+
+        <div class="col-3">      
+          <table id="customers">
+
+            <tr>
+            <th> Division C </th>
+            </tr>
+            {% for team in divisionc.team.all %} 
+            
+            <tr>
+              {% if team.elimination == "eliminated" %}
+              <td style="background-color: brown; color: cornsilk;">{{ team.name }} | GW{{ team.eliminatedgameweek.no }} - {{ team.eliminatedwithpoints }} points </td>
+            {% else %}
+              <td>{{ team.name }}</td>
+            {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+
+        </div>
+
+        <div class="col-3">
+
+              
+          <table id="customers">
+
+            <tr>
+            <th> Division D </th>
+            </tr>
+            {% for team in divisiond.team.all %} 
+            
+            <tr>
+              {% if team.elimination == "eliminated" %}
+              <td style="background-color: brown; color: cornsilk;">{{ team.name }} | GW{{ team.eliminatedgameweek.no }} - {{ team.eliminatedwithpoints }} points </td>
+            {% else %}
+              <td>{{ team.name }}</td>
+            {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+      </div>
+
+
+    </div>
+
+    <div class="row">
+      <div class="col">
+      <p></p>Total managers : {{ totalmanagers }}</p>
+      <p>Eliminated managers: {{ eliminatedmanagers }}</p>
+      <p>Remaining managers:  {{ remainingmanagers }}</p>
+      </div>
+      </div>
+
+</section>
+
+
+
+
+{% include 'footer.html' %}
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+{% endblock %}
+{% block javascript %}{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'newtemplate/base.html' %}
+{% load static %}
+{% block style %}
+<link rel=stylesheet type=text/css href="{% static 'newtemplate/css/tablestyle.css' %}">
+ {% endblock %} 
+ 
+{% block content %}
+<section>
+
+    <!--for demo wrap-->
+    <h2 class=heading><span>Gameweek </span>Winner</h2>
+    <div style="margin-top: 20px;;" class="tbl-header">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+          <tr>
+            {% comment %} <th>SN</th> {% endcomment %}
+            <th>Gameweek</th>
+            <th>Manager</th>
+            <th>Points</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+            {% for winner in gwwinner %}
+            <tr>
+                <td>{{ winner.gameweek }}</td>
+                <td><a style="color: #dbc570;" href="">{{ winner.name.name }}</a></td>
+                <td>{{ winner.points }}</td>
+                {% comment %} <td>{{ team.name }}</td> {% endcomment %}
+                <td><a style="font-weight:bold; color: #dbc570;" href="#">Details</a></td>
+              </tr>
+           {% endfor %}
+          
+        </tbody>
+      </table>
+    </div>
+  </section>
+  
+
+
+  {% endblock %}
+{% block script %}
+<script>
+// '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+{% endblock %}
+

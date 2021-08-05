@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% block title %} Home{% endblock %}
+{% block stylesheet %}
+<style>.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.button3 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #f44336;
+}
+
+.button3:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+.button4 {
+  background-color: white;
+  color: black;
+  border: 2px solid #e7e7e7;
+}
+
+.button4:hover {
+  background-color: #e7e7e7;
+}
+
+.button5 {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+}
+
+.button5:hover {
+  background-color: #555555;
+  color: white;
+}
+
+.register-button{
+  font-weight: bold; 
+  border-radius: 4px;
+  color: black;
+}
+
+.register-button:hover{
+  color: white;
+}
+</style>
+ {% endblock %} 
+
+{% block content %}
+{% include 'nav.html' %}
+
+  <div id="colorlib-main">
+    <section class="ftco-section-no-padding bg-light">
+      <div class="hero-wrap">
+        <div class="overlay"></div>
+        <div class="d-flex align-items-center js-fullheight">
+          <div class="author-image text img d-flex">
+            <section class="home-slider js-fullheight owl-carousel">
+              <div
+                class="slider-item js-fullheight"
+                style="background-image: url({{ company.logo.url }});"
+              ></div>
+              <div
+                class="slider-item js-fullheight"
+                style="background-image: url({{ company.image1.url }});"
+              ></div>
+
+
+
+
+                <div
+                class="slider-item js-fullheight"
+                style="background-image: url({{ company.rewards.url }});"
+              ></div>
+
+              <div
+                class="slider-item js-fullheight"
+                style="background-image: url({{ company.elimination_image.url }});"
+              ></div>
+
+              <div
+                class="slider-item js-fullheight"
+                style="background-image: url({{ company.iamsafe_image.url }});"
+              ></div>
+            </section>
+          </div>
+          <div class="author-info text p-3 p-md-5">
+            <div class="desc">
+              {% comment %} <span class="subheading">Hello! I'm</span> {% endcomment %}
+              <h1 class="big-letter">{{ company.name }}</h1>
+              <h1 class="mb-4">
+                {% comment %} <span>{{ user.get_full_name }}</span> {% endcomment %}
+                {% comment %} <span style="color:#00c483;"> A {{ user.profile.occupation }}.</span> {% endcomment %}
+                <span>{{ company.short_description }}</span>
+              </h1>
+              <p class="mb-4" style="text-indent: 50px;text-align: justify;">
+                {{ company.description }}
+              </p>
+
+
+              <button class="button button5">
+                 <a  class="register-button" href="https://docs.google.com/forms/d/e/1FAIpQLScXgXCJgb2McmoL5DoevccvcIEsCl3bCzKfw8Iv3Ia0I1NjXw/viewform">
+                  Register here
+                </a>
+              </button>
+              
+              <ul class="ftco-social mt-3">
+                {% comment %} <li class="ftco-animate"> {% endcomment %}
+                  {% comment %} <a href="{{ user.profile.youtube_link }}"><span class="icon-youtube"></span></a> {% endcomment %}
+                {% comment %} </li> {% endcomment %}
+                <li class="ftco-animate">
+                  <a href="{{ company.fb_link }}"><span class="icon-facebook"></span></a>
+                </li>
+                {% comment %} <li class="ftco-animate"> {% endcomment %}
+                  {% comment %} <a href="{{ user.profile.insta_link }}"><span class="icon-instagram"></span></a> {% endcomment %}
+                {% comment %} </li> {% endcomment %}
+              </ul>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+ {% include 'gameweekwinner.html' %}
+ {% include 'winner.html' %}
+   
+    {% include 'footer.html' %}
+  </div><!-- END COLORLIB-MAIN -->
+</div><!-- END COLORLIB-PAGE -->
+
+
+{% endblock %} 
+
+{% block javascript %}
+<script>
+  /* When the user clicks on the button, 
+  toggle between hiding and showing the dropdown content */
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(e) {
+    if (!e.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+      if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+      }
+    }
+  }
+  </script>{% endblock %}

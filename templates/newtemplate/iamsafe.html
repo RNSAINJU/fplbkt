@@ -1,0 +1,207 @@
+{% extends 'newtemplate/base.html' %} 
+{% load static %} 
+{% block style %} 
+<link rel=stylesheet type=text/css href="{% static 'newtemplate/css/tablestyle.css'%}"> 
+{% comment %}
+<link rel="stylesheet" href="{% static 'newtemplate/css/bootstrap.css' %}" /> 
+{% endcomment %} 
+{% endblock %} 
+{% block content %}
+<section
+  class="list-category section-margin-top-bottom"
+  style="margin-top: 100px"
+>
+  <div class="container">
+    <div class="dynamic-tabs">
+      <ul class="nav nav-tabs justify-content-between">
+        <li class="nav-item" style="flex: 1">
+          <a class="nav-link active" data-toggle="pill" href="#A">All Detail</a>
+        </li>
+        <li class="nav-item" style="flex: 1">
+          <a class="nav-link" data-toggle="pill" href="#B">Safe</a>
+        </li>
+        <li class="nav-item" style="flex: 1">
+          <a class="nav-link" data-toggle="pill" href="#C"> Un Safe</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section-content mt-4">
+      <div class="tab-content">
+        <div class="tab-pane active" id="A">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+              <tr>
+                <th>SN</th>
+
+                <th>Team</th>
+                <th>Manager</th>
+                <th>Gameweek</th>
+                <th>Gameweek point</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+              {% for team in object_list%}
+              <tr>
+                <td>{{ team.id }}</td>
+                <td>
+                  <a
+                    style="color: #dbc570"
+                    href="{% url 'cv:player-detail' pk=team.pk %}"
+                    >{{ team.name.name }}</a
+                  >
+                </td>
+                <td>{{ team.name.teamname }}</td>
+                <td>{{ team.name.eliminated_gameweek }}</td>
+                <td>
+                  <a
+                    style="font-weight: bold; color: #dbc570"
+                    href="{% url 'cv:player-detail' pk=team.pk %}"
+                    >{{team.name.issafe}}</a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tab-pane" id="B">
+        <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+          <tr>
+            <th>SN</th>
+            
+            <th>Team</th>
+            <th>Manager</th>
+            <th>Gameweek</th>
+            <th>Gameweek point</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+            {% for team in object_list%}
+            <tr>
+                <td>{{ team.id }}</td>
+                <td><a style="color: #dbc570;" href="{% url 'cv:player-detail' pk=team.pk %}">{{ team.name.name }}</a></td>
+                <td>{{ team.name.teamname }}</td>
+                <td>{{ team.name.eliminated_gameweek }}</td>
+                <td><a style="font-weight:bold; color: #dbc570;" href="{% url 'cv:player-detail' pk=team.pk %}">{{team.name.issafe}}</a></td>
+              </tr>
+           {% endfor %}
+          
+        </tbody>
+      </table>
+        </div>
+
+        <div class="tab-pane" id="C">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+              <tr>
+                <th>SN</th>
+
+                <th>Team</th>
+                <th>Manager</th>
+                <th>Gameweek</th>
+                <th>Gameweek point</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+              {% for team in unsafe_team%}
+              <tr>
+                <td>{{ team.id }}</td>
+                <td>
+                  <a
+                    style="color: #dbc570"
+                    href="{% url 'cv:player-detail' pk=team.pk %}"
+                    >{{ team.name.name }}</a
+                  >
+                </td>
+                <td>{{ team.name.teamname }}</td>
+                <td>{{ team.name.eliminated_gameweek }}</td>
+                <td>
+                  <a
+                    style="font-weight: bold; color: #dbc570"
+                    href="{% url 'cv:player-detail' pk=team.pk %}"
+                    >{{team.name.issafe}}</a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% comment %}
+<section>
+  <!--for demo wrap-->
+  <h2 class="heading">FPL Bhaktapur <span>Teams</span></h2>
+  <div style="margin-top: 20px ;" class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>SN</th>
+          <th>Entry</th>
+          <th>Team</th>
+          <th>Manager</th>
+          <th></th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        {% for team in teams%}
+        <tr>
+          <td>{{ team.id }}</td>
+          <td>
+            <a
+              style="color: #dbc570"
+              href="{% url 'cv:player-detail' pk=team.pk %}"
+              >{{ team.entry }}</a
+            >
+          </td>
+          <td>{{ team.teamname }}</td>
+          <td>{{ team.name }}</td>
+          <td>
+            <a
+              style="font-weight: bold; color: #dbc570"
+              href="{% url 'cv:player-detail' pk=team.pk %}"
+              >Details</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endcomment %}
+
+{% endblock %} {% block script %}
+<script>
+  // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+  $(window)
+    .on("load resize ", function () {
+      var scrollWidth =
+        $(".tbl-content").width() - $(".tbl-content table").width();
+      $(".tbl-header").css({ "padding-right": scrollWidth });
+    })
+    .resize();
+</script>
+{% endblock %}

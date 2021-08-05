@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %} Teams {% endblock %}
+{% block stylesheet %}
+
+ {% endblock %} 
+
+{% block content %}
+{% include 'nav.html' %}
+
+		<div id="colorlib-main">
+			<section class="ftco-section ftco-bread">
+				<div class="container">
+					<div class="row no-gutters slider-text justify-content-center align-items-center">
+	          <div class="col-md-8 ftco-animate">
+	            <h1 class="bread">FPL Bhaktapur Teams</h1>
+	          </div>
+	        </div>
+				</div>
+			</section>
+			<section class="ftco-section-3">
+				
+<table id="customers">
+  <tr>
+    <th>SN</th>
+    <th>Entry id</th>
+    <th>Team</th>
+    <th>Manager</th>
+  </tr>
+  {% for team in teams%}
+  <tr>
+    <td>{{ team.id }}</td>
+    <td>{{ team.entry }}</td>
+    <td>{{ team.teamname }}</td>
+    <td>{{ team.name }}</td>
+    <td></td><a  style="color:white !important;" href="{% url 'cv:player-detail' pk=team.pk %}">Gameweek history</a></td>
+  </tr>
+ {% endfor %}
+</table>
+
+			</section>
+
+       {% for obj in winner %}
+ {% if obj.name %}
+ <div  class="gwwinner" style="background: rgb(0,36,33);
+background: linear-gradient(0deg, rgba(0,36,33,1) 0%, rgba(0,255,149,1) 100%, rgba(0,255,115,0.7987570028011204) 100%);"
+
+   <section class="ftco-section">
+      <div class="container">
+        <div class="row justify-content-center mb-2 pb-3">
+          <div
+            class="col-md-7 heading-section heading-section-2 text-center ftco-animate"
+          >
+            <h2 class="mb-4" style="padding-top:30px;">{{ obj.Year }} Season Winner</h2>
+            <h1 class="mb-4">{{ obj.name }}</h2>
+            <h2 class="mb-8" style="color:white;">{{ obj.voice }}</h2>
+          </div>
+        </div>
+        <div class="row no-gutters">
+          
+          
+        
+        </div>
+      </div>
+    </section>
+</div>
+              {% endif %}
+          {% endfor %}
+	 
+			{% include 'footer.html' %}
+			
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+
+	{% endblock %} 
+
+	{% block javascript %}{% endblock %}

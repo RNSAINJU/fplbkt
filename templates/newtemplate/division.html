@@ -1,0 +1,131 @@
+{% extends 'newtemplate/base.html' %}
+{% load static %}
+{% block style %}
+<link rel=stylesheet type=text/css href="{% static 'newtemplate/css/tablestyle.css' %}">
+  <style>
+
+    /* custom */
+.nav-link{
+  text-align: center;
+  color: #b81e20 !important;
+  font-weight: bold;
+  font-family: "Oswald", sans-serif;
+}
+  </style>
+ {% endblock %} 
+ 
+{% block content %}
+<section>
+
+  
+    <!--for demo wrap-->
+    <h2 class="heading"><span> Division</span>League</h2>
+    <div class="row" style="margin-bottom: 30;">
+ 
+      <div class="container">
+        <div class="dynamic-tabs">
+          <ul class="nav nav-tabs justify-content-between">
+            <li class="nav-item" style="flex: 1">
+              <a class="nav-link active" data-toggle="pill" href="#">All Divisions</a>
+            </li>
+            <li class="nav-item" style="flex: 1">
+              <a class="nav-link" href="{% url 'cv:divisionselection' division='A' %}">Division A</a>
+            </li>
+            <li class="nav-item" style="flex: 1">
+              <a class="nav-link" data-toggle="pill" href="#B">Division B</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-lg-6">
+          <h2 style="font-size: 16px; 
+          margin-top: 20px; " class="heading heading2" >Division<span> A</span></h2>
+          <div style="margin-top: 20px;;" class="tbl-header">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <thead>
+                <tr> 
+                  <th>Position</th>
+                  <th>Manager</th>
+                  <th>Points</th>
+                  <th>Total Point</th>
+                  <!-- <th>Action</th> -->
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tbody>
+          {% for obj in teama %}
+          <tr>
+              <td>{{ obj.position }}</td>
+              <td><a style="color: #dbc570;"  href="{% url 'cv:player-detail' pk=obj.name.pk %}"><br>{{obj.name.teamname}}</a></td>
+              <td>{{ obj.event_total }}</td>
+              <td>{{ obj.total_points }}</td>
+             
+            </tr>
+        {% endfor %}
+          
+        </tbody>
+      </table>
+    </div>
+      </div>
+
+      <div class="col-lg-6">
+        <h2 style="font-size: 16px; 
+        margin-top: 20px;" class="heading">Division<span> B</span></h2>
+        <div style="margin-top: 20px;" class="tbl-header">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+              <tr> 
+                <th>Position</th>
+                <th>Manager</th>
+                <th>Points</th>
+                <th>Total Point</th>
+                <!-- <th>Action</th> -->
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+        {% for obj in teamb %}
+        <tr>
+            <td>{{ obj.position }}</td>
+            <td><a style="color: #dbc570;" href="{% url 'cv:player-detail' pk=obj.name.pk %}">{{ obj.name.name }},<br>{{obj.name.teamname}}</a></td>
+            <td>{{ obj.event_total }}</td>
+            <td>{{ obj.total_points }}</td>
+            <!-- <td><a style="color: #dbc570;">Details</a></td> -->
+          </tr>
+      {% endfor %}
+        
+      </tbody>
+    </table>
+  </div>
+    </div>
+
+  </div>
+  </section>
+  
+  
+  <!-- follow me template -->
+  <!-- <div class="made-with-love">
+    Made with
+    <i>♥</i> by
+    <a target="_blank" href="https://codepen.io/nikhil8krishnan">Nikhil Krishnan</a>
+  </div> -->
+
+
+
+  {% endblock %}
+{% block script %}
+<script>
+// '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+{% endblock %}
+

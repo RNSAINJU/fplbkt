@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block title %}Division League{% endblock %}
+{% block stylesheet %} 
+<style>
+  .elimination-table{
+    font-size: 9px;
+  }
+  </style>
+
+{% endblock%}
+
+{% block content %}
+{% include 'nav.html' %}
+
+		<div id="colorlib-main">
+			<section class="ftco-section ftco-bread">
+				<div class="container">
+					<div class="row no-gutters slider-text justify-content-center align-items-center">
+	          <div class="col-md-8 ftco-animate">
+	            <h1 class="bread">Division League</h1>
+	          </div>
+	        </div>
+				</div>
+			</section>
+
+      <!-- <section class="ftco-section-3"></section>
+     
+    </section> -->
+
+
+	<section class="ftco-section-3 elimination-table">
+
+    <p class="pl-8 pr-8 mb-4" style="text-indent: 50px">{{ company.division_description }}</p><br><br>
+  
+  <div class="row">
+
+   
+  <div class="col-6" style="margin-bottom: 20px;">
+    <p class="division-text">Gameweek  Winners (Division A)</p>
+      
+      <table id="customers">
+        <tr> 
+        <th>Gameweek</th>
+        <th> Manager</th>
+        <th>Points</th>
+        </tr>
+        {% for div in divisiona %}
+        <tr>
+        <td>{{ div.Gameweek.no }}</td>
+        <td>{{ div.Team.name }}</td>
+        <td>{{ div.Points }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+  </div>
+
+  <div class="col-6">
+
+    <p class="division-text">Gameweek  Winners (Division B)</p>
+      
+      <table id="customers">
+        <tr> 
+        <th>Gameweek</th>
+        <th> Manager</th>
+        <th>Points</th>
+        </tr>
+        {% for div in divisionb %}
+        <tr>
+        <td>{{ div.Gameweek.no }}</td>
+        <td>{{ div.Team.name }}</td>
+        <td>{{ div.Points }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+  </div>
+
+  <div class="col-6">
+    <p class="division-text">Gameweek  Winners (Division C)</p>
+      
+      <table id="customers">
+        <tr> 
+        <th>Gameweek</th>
+        <th> Manager</th>
+        <th>Points</th>
+        </tr>
+        {% for div in divisionc %}
+        <tr>
+        <td>{{ div.Gameweek.no }}</td>
+        <td>{{ div.Team.name }}</td>
+        <td>{{ div.Points }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+  </div>
+
+  <div class="col-6">
+    <p class="division-text">Gameweek  Winners (Division D)</p>
+      
+      <table id="customers">
+        <tr> 
+        <th>Gameweek</th>
+        <th> Manager</th>
+        <th>Points</th>
+        </tr>
+        {% for div in divisiond %}
+        <tr>
+        <td>{{ div.Gameweek.no }}</td>
+        <td>{{ div.Team.name }}</td>
+        <td>{{ div.Points }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+  </div>
+
+</div>
+      
+
+    </section>
+
+
+      
+            </section>
+      
+
+{% include 'footer.html' %}
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+{% endblock %}
+{% block javascript %}{% endblock %}
