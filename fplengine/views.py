@@ -64,11 +64,10 @@ class TeamView(TemplateView):
     template_name='newtemplate/teams.html'
 
     def get(self,request):
-        classic_league=asyncio.run(get_players_data())
-        i=0
+        classic_league=get_newentries_classicleagues()
+        print(classic_league)
+
         for player in classic_league['new_entries']['results']:
-            i=i+1
-            print(i)
             # print(player['id'])
             # print(player['event_total'])
             name=player['player_first_name']+""+player['player_last_name']
@@ -314,28 +313,20 @@ async def get_home(request):
     print(result)
     return HttpResponse(player)
 
+def get_classic_league():
+    url = "https://fantasy.premierleague.com/api/leagues-classic/188305/standings/?page_new_entries=2"
+    r = requests.get(url).json()
+    for s in r:
+        print(r)
+
 async def get_players_data():
     async with aiohttp.ClientSession() as session:
         fpl = FPL(session)
         await fpl.login(email="aryan.sainju@gmail.com",password="probook450")
         classic_league = await fpl.get_classic_league(188305,return_json=True)
+
     return classic_league
 
-def get_classic_league():
-    url = "https://fantasy.premierleague.com/api/leagues-classic/188305/standings/"
-    r = requests.get(url).json()
-    for standing in r['standings']['results']:
-        user = get_object_or_404(Teams,entry=standing['entry'])
-        classic_league,created = ClassicLeague.objects.get_or_create(position=standing['rank'],event_total=standing['event_total'], total_points=standing['total'],defaults={'name':user})
-        if not created:
-            classic_league.position =standing['rank']
-            classic_league.event_total=standing['event_total']
-            classic_league.total_points=standing['total']
-            classic_league.save()
-            print("updated")
-        
-        print(created)
-        
 async def get_deadline():
     async with aiohttp.ClientSession() as session:
         fpl = FPL(session)
@@ -344,7 +335,7 @@ async def get_deadline():
 
 
 # # base url for all FPL API endpoints
-# base_url = 'https://fantasy.premierleague.com/api/'
+base_url = 'https://fantasy.premierleague.com/api/'
 
 # # get data from bootstrap-static endpoint
 # r = requests.get(base_url+'bootstrap-static/').json()
@@ -508,6 +499,17 @@ def get_division_league():
 # get division league positions according to division
 # get_division_league()
 
+def get_newentries_classicleagues():
+        '''get all past season info for a given player_id'''
+        
+        # send GET request to
+        # https://fantasy.premierleague.com/api/element-summary/{PID}/
+        r = requests.get(
+                base_url + 'leagues-classic/188305/standings/?page_new_entries=2'
+        ).json()
+        
+        # extract 'history_past' data from response into dataframe
+        return r
 
 
 

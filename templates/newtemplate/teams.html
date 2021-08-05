@@ -9,38 +9,36 @@
 
     <!--for demo wrap-->
     <h2 class=heading>FPL Bhaktapur <span>Teams</span></h2>
-    <div style="margin-top: 20px;" class="tbl-header">
-      <table cellpadding="0" cellspacing="0" border="0">
-        <thead>
-          <tr>
-            <th>SN</th>
-            <th>Entry</th>
-            <th>Team</th>
-            <th>Manager</th>
-            <th></th>
-          </tr>
-        </thead>
-      </table>
-    </div>
-    <div class="tbl-content">
-      <table cellpadding="0" cellspacing="0" border="0">
-        <tbody>
-            {% for team in teams%}
-            <tr>
-                <td>{{ team.id }}</td>
-                <td><a style="color: #dbc570;" href="{% url 'cv:player-detail' pk=team.pk %}">{{ team.entry }}</a></td>
-                <td>{{ team.teamname }}</td>
-                <td>{{ team.name }}</td>
-                <td><a style="font-weight:bold; color: #dbc570;" href="{% url 'cv:player-detail' pk=team.pk %}">Details</a></td>
-              </tr>
-           {% endfor %}
-          
-        </tbody>
-      </table>
-    </div>
+
   </section>
   
-  
+<div class="table-main" style="padding: 5px 5px 5px 5px">
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th width="20px">SN</th>
+          <th>Team Name</th>
+          <th>Manager</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+          {% for team in teams%}
+          <tr>
+              <td width=20px;>{{ team.id }}</td>
+              <td><a style="color: #dbc570;" href="{% url 'cv:player-detail' pk=team.pk %}">{{ team.teamname }}</a></td>
+              <td>{{ team.name }}</td>
+            </tr>
+         {% endfor %}
+        
+      </tbody>
+    </table>
+  </div>
+</div>
   <!-- follow me template -->
   <!-- <div class="made-with-love">
     Made with

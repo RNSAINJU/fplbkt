@@ -43,8 +43,8 @@ class Teams(models.Model):
         ('safe','Safe'),
         ('not safe','Not safe'),
     )
-    name=models.CharField(max_length=30, unique=True)
-    teamname=models.CharField(max_length=30, unique=True)
+    name=models.CharField(max_length=30)
+    teamname=models.CharField(max_length=30)
     entry=models.IntegerField(unique=True)
     divisions=models.ForeignKey(Division, on_delete=models.CASCADE, blank=True, null=True)
     elimination=models.CharField(max_length=30,choices=ACTIVE_CHOICES,default='not eliminated')
