@@ -7162,9 +7162,9 @@ h6 {
     font-weight: 400; }
 
 .banner-text {
-  background: #57606a;
+  background:rgba(0, 0, 0, 0.9) !important;;
   font-family: "Montserrat", sans-serif;
-  font-size: 30px;
+  font-size: 26px;
   color: white;
   font-weight: 400;
   text-transform: uppercase;
