@@ -527,7 +527,7 @@ def get_newentries_classicleagues():
         # send GET request to
         # https://fantasy.premierleague.com/api/element-summary/{PID}/
         r = requests.get(
-                base_url + 'leagues-classic/188305/standings/?page_new_entries=2'
+                base_url + 'leagues-classic/188305/standings'
         ).json()
         
         # extract 'history_past' data from response into dataframe

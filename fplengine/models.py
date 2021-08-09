@@ -107,7 +107,7 @@ class Company(models.Model):
     short_description=models.CharField(max_length=80, unique=True)
     description=models.TextField(unique=True)
     description2=models.TextField(unique=True,blank=True)
-    name_in_style= models.CharField(max_length=30, unique=True)
+    notice= models.TextField(unique=True)
     logo=models.ImageField(upload_to=user_image_path, null=True, blank=False)
     image1=models.ImageField(upload_to=user_image_path, null=True, blank=True)
     # image2=models.ImageField(upload_to=user_image_path, null=True, blank=True)
