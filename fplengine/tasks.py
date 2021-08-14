@@ -72,7 +72,7 @@ base_url = 'https://fantasy.premierleague.com/api/'
 
 @shared_task
 def get_classic_league():
-    url = "https://fantasy.premierleague.com/api/leagues-classic/188305/standings/?page_new_entries=2"
+    url = "https://fantasy.premierleague.com/api/leagues-classic/188305/standings"
     r = requests.get(url).json()
     for standing in r['standings']['results']:
         user = get_object_or_404(Teams,entry=standing['entry'])

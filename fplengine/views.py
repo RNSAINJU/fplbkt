@@ -50,19 +50,52 @@ class RulesView(TemplateView):
         return render(request,self.template_name,args)
 
 # standing results
-# class TeamView(TemplateView):
+class TeamView(TemplateView):
+    template_name='newtemplate/teams.html'
+
+    def get(self,request):
+        classic_league=asyncio.run(get_players_data())
+        print(classic_league)
+        for player in classic_league['standings']['results']:
+            # print(player['id'])
+            # print(player['event_total'])
+            name=player['player_name']
+            rank=player['rank']
+            rank=player['last_rank']
+            totalpoints=(player['total'])
+            entry=player['entry']
+            teamname=player['entry_name']
+
+            try:
+                obj=Teams.objects.get(entry=entry)
+                print(name+'Data already exists')
+            except Teams.DoesNotExist:
+                Teams.objects.create(name=name,teamname=teamname,entry=entry)
+
+        winner=Winner.objects.all()
+        # company=get_object_or_404(Company, id=1)
+        teams=Teams.objects.all()
+        args={
+            # 'company':company,
+            'teams':teams,
+            'winner':winner
+        }
+        return render(request,self.template_name,args)
+
+# class newEntryTeamView(TemplateView):
 #     template_name='newtemplate/teams.html'
 
 #     def get(self,request):
-#         classic_league=asyncio.run(get_players_data())
+#         classic_league=get_newentries_classicleagues()
 #         print(classic_league)
-#         for player in classic_league['standings']['results']:
+
+#         for player in classic_league['new_entries']['results']:
 #             # print(player['id'])
 #             # print(player['event_total'])
-#             name=player['player_name']
-#             rank=player['rank']
-#             rank=player['last_rank']
-#             totalpoints=(player['total'])
+#             name=player['player_first_name']+""+player['player_last_name']
+#             # rank=player['rank']
+#             # rank=player['last_rank']
+#             # totalpoints=(player['total'])
 #             entry=player['entry']
 #             teamname=player['entry_name']
 
@@ -81,39 +114,6 @@ class RulesView(TemplateView):
 #             'winner':winner
 #         }
 #         return render(request,self.template_name,args)
-
-class TeamView(TemplateView):
-    template_name='newtemplate/teams.html'
-
-    def get(self,request):
-        classic_league=get_newentries_classicleagues()
-        print(classic_league)
-
-        for player in classic_league['new_entries']['results']:
-            # print(player['id'])
-            # print(player['event_total'])
-            name=player['player_first_name']+""+player['player_last_name']
-            # rank=player['rank']
-            # rank=player['last_rank']
-            # totalpoints=(player['total'])
-            entry=player['entry']
-            teamname=player['entry_name']
-
-            try:
-                obj=Teams.objects.get(entry=entry)
-                # print(name+'Data already exists')
-            except Teams.DoesNotExist:
-                Teams.objects.create(name=name,teamname=teamname,entry=entry)
-
-        winner=Winner.objects.all()
-        # company=get_object_or_404(Company, id=1)
-        teams=Teams.objects.all()
-        args={
-            # 'company':company,
-            'teams':teams,
-            'winner':winner
-        }
-        return render(request,self.template_name,args)
 
 class PlayerDetailsView(TemplateView):
     template_name='newtemplate/include/player-detail.html'
@@ -335,11 +335,7 @@ async def get_home(request):
     print(result)
     return HttpResponse(player)
 
-def get_classic_league():
-    url = "https://fantasy.premierleague.com/api/leagues-classic/188305/standings/?page_new_entries=2"
-    r = requests.get(url).json()
-    for s in r:
-        print(r)
+
 
 async def get_players_data():
     async with aiohttp.ClientSession() as session:
@@ -504,22 +500,7 @@ def get_division_league():
                 defaults={'name':user})
             position=position+1
 
-# Create iamsafe points for respective gameweek
-# def check_eliminated(request):
 
-
-
-# creates divisions and assigns teams with random seperated division
-# create_division()
-
-# Create iamsafe margin for respective gameweeks
-# create_iamsafe_margin()
-
-# Gets division gameweek winner
-# get_division_gameweek_winner()
-
-# get division league positions according to division
-# get_division_league()
 
 def get_newentries_classicleagues():
         '''get all past season info for a given player_id'''
@@ -534,5 +515,19 @@ def get_newentries_classicleagues():
         return r
 
 
+def get_classic_league():
+    url = "https://fantasy.premierleague.com/api/leagues-classic/188305/standings"
+    r = requests.get(url).json()
+    for standing in r['standings']['results']:
+        user = get_object_or_404(Teams,entry=standing['entry'])
+        classic_league,created = ClassicLeague.objects.get_or_create(position=standing['rank'],event_total=standing['event_total'], total_points=standing['total'],defaults={'name':user})
+        if not created:
+            classic_league.position =standing['rank']
+            classic_league.event_total=standing['event_total']
+            classic_league.total_points=standing['total']
+            classic_league.save()
+            print("updated")
+        
+        print(created)
 
-
+get_classic_league()
