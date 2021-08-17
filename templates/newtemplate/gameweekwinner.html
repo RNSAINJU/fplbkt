@@ -6,18 +6,18 @@
  
 {% block content %}
 <section>
-
+  <h2 class=heading><span>Gameweek </span>Winner</h2>
+  </section>
     <!--for demo wrap-->
-    <h2 class=heading><span>Gameweek </span>Winner</h2>
+    <div class="table-main" style="padding: 0 10px 10px 10px">
     <div style="margin-top: 20px;;" class="tbl-header">
       <table cellpadding="0" cellspacing="0" border="0">
         <thead>
           <tr>
             {% comment %} <th>SN</th> {% endcomment %}
-            <th>Gameweek</th>
+            <th width="20px">GW</th>
             <th>Manager</th>
             <th>Points</th>
-            <th>Action</th>
           </tr>
         </thead>
       </table>
@@ -27,18 +27,21 @@
         <tbody>
             {% for winner in gwwinner %}
             <tr>
-                <td>{{ winner.gameweek }}</td>
-                <td><a style="color: #dbc570;" href="">{{ winner.name.name }}</a></td>
+                <td width="20px">{{ winner.gameweek }}</td>
+                <td>{% for w in winner.name.all %}
+                  <a style="color: #dbc570;" href="{% url 'cv:player-detail' pk=w.pk %}">
+                  {{ w.name }}
+                  {% endfor %}
+                </a></td>
                 <td>{{ winner.points }}</td>
                 {% comment %} <td>{{ team.name }}</td> {% endcomment %}
-                <td><a style="font-weight:bold; color: #dbc570;" href="#">Details</a></td>
               </tr>
            {% endfor %}
           
         </tbody>
       </table>
     </div>
-  </section>
+</div>
   
 
 

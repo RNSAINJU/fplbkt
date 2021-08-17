@@ -342,7 +342,7 @@ def classicleagues():
         # send GET request to
         # https://fantasy.premierleague.com/api/element-summary/{PID}/
         r = requests.get(
-                base_url + 'leagues-classic/188305/standings'
+                base_url + 'leagues-classic/188305/standings/'
         ).json()
         
         # extract 'history_past' data from response into dataframe
@@ -428,6 +428,7 @@ def get_gameweek_winner():
     
     return HttpResponse(f"{gameweek_winner_point.player.name}")
 
+# get_gameweek_winner()
 # def get_division_gameweek_winner():
 #     latest_gameweek = get_latest_gameweek()
 #     Gameweeks=Gameweek.objects.filter(player__id=51)
@@ -612,4 +613,4 @@ def get_classic_league():
     else:
       get_results(r)
 
-get_classic_league()
+# get_classic_league()
