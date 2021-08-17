@@ -336,12 +336,24 @@ async def get_home(request):
     return HttpResponse(player)
 
 
+def classicleagues():
+        '''get all past season info for a given player_id'''
+        
+        # send GET request to
+        # https://fantasy.premierleague.com/api/element-summary/{PID}/
+        r = requests.get(
+                base_url + 'leagues-classic/188305/standings'
+        ).json()
+        
+        # extract 'history_past' data from response into dataframe
+        return r
 
 async def get_players_data():
     async with aiohttp.ClientSession() as session:
         fpl = FPL(session)
         await fpl.login(email="aryan.sainju@gmail.com",password="probook450")
-        classic_league = await fpl.get_classic_league(188305,return_json=True)
+        # classic_league = await fpl.get_classic_league(188305,return_json=True)
+        classic_league=classicleagues()
 
     return classic_league
 
@@ -416,55 +428,55 @@ def get_gameweek_winner():
     
     return HttpResponse(f"{gameweek_winner_point.player.name}")
 
-def get_division_gameweek_winner():
-    latest_gameweek = get_latest_gameweek()
-    Gameweeks=Gameweek.objects.filter(player__id=51)
-    divisions=Division.objects.all()
-    print(latest_gameweek)
-    for division in divisions:
-        for gw in Gameweeks:
-            no= gw.no
-            gameweek_winner_point = Gameweek.objects.filter(no=no).order_by('-point').first()
-            gameweek_winners = Gameweek.objects.filter(no=gameweek_winner_point.no, point=gameweek_winner_point.point)
-            gameweek_winner, created = DivisionGameweekWinner.objects.get_or_create(
-                gameweek=gameweek_winner_point.no,
-                points=gameweek_winner_point.point,
-            )
-            gameweek_winner.name.add(game.player)
+# def get_division_gameweek_winner():
+#     latest_gameweek = get_latest_gameweek()
+#     Gameweeks=Gameweek.objects.filter(player__id=51)
+#     divisions=Division.objects.all()
+#     print(latest_gameweek)
+#     for division in divisions:
+#         for gw in Gameweeks:
+#             no= gw.no
+#             gameweek_winner_point = Gameweek.objects.filter(no=no).order_by('-point').first()
+#             gameweek_winners = Gameweek.objects.filter(no=gameweek_winner_point.no, point=gameweek_winner_point.point)
+#             gameweek_winner, created = DivisionGameweekWinner.objects.get_or_create(
+#                 gameweek=gameweek_winner_point.no,
+#                 points=gameweek_winner_point.point,
+#             )
+#             gameweek_winner.name.add(game.player)
    
     
-    return HttpResponse(f"{gameweek_winner_point.player.name}")
+#     return HttpResponse(f"{gameweek_winner_point.player.name}")
 
 def partition (list_in, n):
     random.shuffle(list_in)
     return ([list_in[i::n] for i in range(n)])
 
 # Creates respective division with teams divided accordingly
-def create_division():
-    teams=Teams.objects.all()
-    team_list=[]
-    i=1
-    for team in teams:
-        team_list.append(team.id)
-        i=i+1
+# def create_division():
+#     teams=Teams.objects.all()
+#     team_list=[]
+#     i=1
+#     for team in teams:
+#         team_list.append(team.id)
+#         i=i+1
 
-    p=partition(team_list,4)
+#     p=partition(team_list,4)
 
 
-    divisions=['A','B','C','D']
-    i=0
-    for division in divisions:
-        division, created = Division.objects.get_or_create(
-                name=division
-            )
+#     divisions=['A','B','C','D']
+#     i=0
+#     for division in divisions:
+#         division, created = Division.objects.get_or_create(
+#                 name=division
+#             )
 
-        for team in p[i]:
-            # print(team)
-            player=get_object_or_404(Teams,id=team)
-            player.divisions=division
-            player.save()
+#         for team in p[i]:
+#             # print(team)
+#             player=get_object_or_404(Teams,id=team)
+#             player.divisions=division
+#             player.save()
 
-        i=i+1
+#         i=i+1
 
 
 def create_iamsafe_margin():
@@ -515,19 +527,4 @@ def get_newentries_classicleagues():
         return r
 
 
-def get_classic_league():
-    url = "https://fantasy.premierleague.com/api/leagues-classic/188305/standings"
-    r = requests.get(url).json()
-    for standing in r['standings']['results']:
-        user = get_object_or_404(Teams,entry=standing['entry'])
-        classic_league,created = ClassicLeague.objects.get_or_create(position=standing['rank'],event_total=standing['event_total'], total_points=standing['total'],defaults={'name':user})
-        if not created:
-            classic_league.position =standing['rank']
-            classic_league.event_total=standing['event_total']
-            classic_league.total_points=standing['total']
-            classic_league.save()
-            print("updated")
-        
-        print(created)
 
-get_classic_league()
