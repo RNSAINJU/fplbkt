@@ -501,33 +501,3 @@ def get_division_league():
             position=position+1
 
 
-
-def get_newentries_classicleagues():
-        '''get all past season info for a given player_id'''
-        
-        # send GET request to
-        # https://fantasy.premierleague.com/api/element-summary/{PID}/
-        r = requests.get(
-                base_url + 'leagues-classic/188305/standings'
-        ).json()
-        
-        # extract 'history_past' data from response into dataframe
-        return r
-
-
-def get_classic_league():
-    url = "https://fantasy.premierleague.com/api/leagues-classic/188305/standings"
-    r = requests.get(url).json()
-    for standing in r['standings']['results']:
-        user = get_object_or_404(Teams,entry=standing['entry'])
-        classic_league,created = ClassicLeague.objects.get_or_create(position=standing['rank'],event_total=standing['event_total'], total_points=standing['total'],defaults={'name':user})
-        if not created:
-            classic_league.position =standing['rank']
-            classic_league.event_total=standing['event_total']
-            classic_league.total_points=standing['total']
-            classic_league.save()
-            print("updated")
-        
-        print(created)
-
-get_classic_league()
