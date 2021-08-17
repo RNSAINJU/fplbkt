@@ -513,9 +513,6 @@ def get_division_league():
             position=position+1
 
 
-<<<<<<< HEAD
-=======
-
 def get_newentries_classicleagues():
         '''get all past season info for a given player_id'''
         
@@ -599,20 +596,19 @@ def get_results(r):
                 print("updated")
         
 
-def get_classic_league():
-    url = "https://fantasy.premierleague.com/api/leagues-classic/188305/standings"
-    r = requests.get(url).json()
-    data=str(r['standings']['has_next'])
+# def get_classic_league():
+#     url = "https://fantasy.premierleague.com/api/leagues-classic/188305/standings"
+#     r = requests.get(url).json()
+#     data=str(r['standings']['has_next'])
 
-    if data == "True":
-        firsturl=url
-        firstpageresult = requests.get(firsturl).json()
-        secondurl="https://fantasy.premierleague.com/api/leagues-classic/188305/standings/?page_standings=2"
-        secondpageresult = requests.get(secondurl).json()
-        get_results(firstpageresult)
-        get_results(secondpageresult)
-    else:
-      get_results(r)
+#     if data == "True":
+#         firsturl=url
+#         firstpageresult = requests.get(firsturl).json()
+#         secondurl="https://fantasy.premierleague.com/api/leagues-classic/188305/standings/?page_standings=2"
+#         secondpageresult = requests.get(secondurl).json()
+#         get_results(firstpageresult)
+#         get_results(secondpageresult)
+#     else:
+#       get_results(r)
 
-get_classic_league()
->>>>>>> ec21f938e0a1074ec8fafa46c6955b02c89bbedb
+# get_classic_league()
