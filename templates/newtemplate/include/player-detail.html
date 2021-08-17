@@ -2,26 +2,35 @@
 {% load static %}
 {% block style %}
 <link rel=stylesheet type=text/css href="{% static 'newtemplate/css/tablestyle.css' %}">
+
+<style>
+  .h{
+    font-size: 9px !important;
+  }
+</style>
  {% endblock %} 
  
 {% block content %}
 <section>
 
-    <!--for demo wrap-->
     <h2 class=heading>{{ team.name }} 
       <br><span>{{ team.teamname }}</span></h2>
-    <div style="margin-top: 20px;" class="tbl-header">
-      <table cellpadding="0" cellspacing="0" border="0">
+
+    </section>
+
+    <div class="table-main" style="padding: 0 5px 5px 5px">
+    <div  class="tbl-header">
+      <table id="points-table" cellpadding="0" cellspacing="0" border="0">
         <thead>
           <tr>
-            <th>Gameweek</th>
-            <th>Points</th>
-            <th>Point on Bench</th>
-            <th>Total points</th>
-            <th>Bank</th>
-            <th>Value</th>
-            <th>Transfer</th>
-            <th>Transfer Cost</th>
+            <th class="h"  width="10px">GW</th>
+            <th class="h">Points</th>
+            <th class="h">Point on Bench</th>
+            <th class="h">Total points</th>
+            <th class="h">Bank</th>
+            <th class="h">Value</th>
+            <th class="h">Transfer</th>
+            <th class="h">Transfer Cost</th>
           </tr>
         </thead>
       </table>
@@ -31,29 +40,31 @@
         <tbody>
           {% for gw in gameweek.all %}
           <tr>
-            <td>GW -{{ gw.no }}</td>
-            <td>{{ gw.point }}</td>
-            <td>{{ gw.point_on_bench }}</td>
-            <td>{{ gw.totalpoints }}</td>
-            <td>{{ gw.bank }}</td>
-            <td>{{ gw.value }}</td>
-            <td>{{ gw.event_transfers }}</td>
-            <td>{{ gw.event_transfers_cost }}</td>
+            <td  width="20px" class="h">{{ gw.no }}</td>
+            <td class="h">{{ gw.point }}</td>
+            <td class="h">{{ gw.point_on_bench }}</td>
+            <td class="h">{{ gw.totalpoints }}</td>
+            <td class="h">{{ gw.bank }}</td>
+            <td class="h">{{ gw.value }}</td>
+            <td class="h">{{ gw.event_transfers }}</td>
+            <td class="h">{{ gw.event_transfers_cost }}</td>
           </tr>
           {% endfor %}
           
         </tbody>
       </table>
     </div>
-  </section>
+  </div>
+
+
   
   
   <!-- follow me template -->
-  <div class="made-with-love">
+  <!-- <div class="made-with-love">
     Made with
     <i>♥</i> by
     <a target="_blank" href="https://codepen.io/nikhil8krishnan">Nikhil Krishnan</a>
-  </div>
+  </div> -->
 
 
 

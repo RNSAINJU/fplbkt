@@ -342,7 +342,7 @@ def classicleagues():
         # send GET request to
         # https://fantasy.premierleague.com/api/element-summary/{PID}/
         r = requests.get(
-                base_url + 'leagues-classic/188305/standings'
+                base_url + 'leagues-classic/188305/standings/'
         ).json()
         
         # extract 'history_past' data from response into dataframe
@@ -428,6 +428,7 @@ def get_gameweek_winner():
     
     return HttpResponse(f"{gameweek_winner_point.player.name}")
 
+# get_gameweek_winner()
 # def get_division_gameweek_winner():
 #     latest_gameweek = get_latest_gameweek()
 #     Gameweeks=Gameweek.objects.filter(player__id=51)
@@ -596,6 +597,7 @@ def get_results(r):
                 print("updated")
         
 
+<<<<<<< HEAD
 # def get_classic_league():
 #     url = "https://fantasy.premierleague.com/api/leagues-classic/188305/standings"
 #     r = requests.get(url).json()
@@ -612,3 +614,21 @@ def get_results(r):
 #       get_results(r)
 
 # get_classic_league()
+=======
+def get_classic_league():
+    url = "https://fantasy.premierleague.com/api/leagues-classic/188305/standings"
+    r = requests.get(url).json()
+    data=str(r['standings']['has_next'])
+
+    if data == "True":
+        firsturl=url
+        firstpageresult = requests.get(firsturl).json()
+        secondurl="https://fantasy.premierleague.com/api/leagues-classic/188305/standings/?page_standings=2"
+        secondpageresult = requests.get(secondurl).json()
+        get_results(firstpageresult)
+        get_results(secondpageresult)
+    else:
+      get_results(r)
+
+# get_classic_league()
+>>>>>>> 7a6c48f8194cca290c5f02bacb4e1b20dc1075e4
