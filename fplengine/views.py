@@ -55,7 +55,7 @@ class TeamView(TemplateView):
 
     def get(self,request):
         classic_league=asyncio.run(get_players_data())
-        print(classic_league)
+        # print(classic_league)
         for player in classic_league['standings']['results']:
             # print(player['id'])
             # print(player['event_total'])
@@ -336,12 +336,24 @@ async def get_home(request):
     return HttpResponse(player)
 
 
+def classicleagues():
+        '''get all past season info for a given player_id'''
+        
+        # send GET request to
+        # https://fantasy.premierleague.com/api/element-summary/{PID}/
+        r = requests.get(
+                base_url + 'leagues-classic/188305/standings'
+        ).json()
+        
+        # extract 'history_past' data from response into dataframe
+        return r
 
 async def get_players_data():
     async with aiohttp.ClientSession() as session:
         fpl = FPL(session)
         await fpl.login(email="aryan.sainju@gmail.com",password="probook450")
-        classic_league = await fpl.get_classic_league(188305,return_json=True)
+        # classic_league = await fpl.get_classic_league(188305,return_json=True)
+        classic_league=classicleagues()
 
     return classic_league
 
@@ -416,55 +428,55 @@ def get_gameweek_winner():
     
     return HttpResponse(f"{gameweek_winner_point.player.name}")
 
-def get_division_gameweek_winner():
-    latest_gameweek = get_latest_gameweek()
-    Gameweeks=Gameweek.objects.filter(player__id=51)
-    divisions=Division.objects.all()
-    print(latest_gameweek)
-    for division in divisions:
-        for gw in Gameweeks:
-            no= gw.no
-            gameweek_winner_point = Gameweek.objects.filter(no=no).order_by('-point').first()
-            gameweek_winners = Gameweek.objects.filter(no=gameweek_winner_point.no, point=gameweek_winner_point.point)
-            gameweek_winner, created = DivisionGameweekWinner.objects.get_or_create(
-                gameweek=gameweek_winner_point.no,
-                points=gameweek_winner_point.point,
-            )
-            gameweek_winner.name.add(game.player)
+# def get_division_gameweek_winner():
+#     latest_gameweek = get_latest_gameweek()
+#     Gameweeks=Gameweek.objects.filter(player__id=51)
+#     divisions=Division.objects.all()
+#     print(latest_gameweek)
+#     for division in divisions:
+#         for gw in Gameweeks:
+#             no= gw.no
+#             gameweek_winner_point = Gameweek.objects.filter(no=no).order_by('-point').first()
+#             gameweek_winners = Gameweek.objects.filter(no=gameweek_winner_point.no, point=gameweek_winner_point.point)
+#             gameweek_winner, created = DivisionGameweekWinner.objects.get_or_create(
+#                 gameweek=gameweek_winner_point.no,
+#                 points=gameweek_winner_point.point,
+#             )
+#             gameweek_winner.name.add(game.player)
    
     
-    return HttpResponse(f"{gameweek_winner_point.player.name}")
+#     return HttpResponse(f"{gameweek_winner_point.player.name}")
 
 def partition (list_in, n):
     random.shuffle(list_in)
     return ([list_in[i::n] for i in range(n)])
 
 # Creates respective division with teams divided accordingly
-def create_division():
-    teams=Teams.objects.all()
-    team_list=[]
-    i=1
-    for team in teams:
-        team_list.append(team.id)
-        i=i+1
+# def create_division():
+#     teams=Teams.objects.all()
+#     team_list=[]
+#     i=1
+#     for team in teams:
+#         team_list.append(team.id)
+#         i=i+1
 
-    p=partition(team_list,4)
+#     p=partition(team_list,4)
 
 
-    divisions=['A','B','C','D']
-    i=0
-    for division in divisions:
-        division, created = Division.objects.get_or_create(
-                name=division
-            )
+#     divisions=['A','B','C','D']
+#     i=0
+#     for division in divisions:
+#         division, created = Division.objects.get_or_create(
+#                 name=division
+#             )
 
-        for team in p[i]:
-            # print(team)
-            player=get_object_or_404(Teams,id=team)
-            player.divisions=division
-            player.save()
+#         for team in p[i]:
+#             # print(team)
+#             player=get_object_or_404(Teams,id=team)
+#             player.divisions=division
+#             player.save()
 
-        i=i+1
+#         i=i+1
 
 
 def create_iamsafe_margin():
@@ -501,3 +513,106 @@ def get_division_league():
             position=position+1
 
 
+<<<<<<< HEAD
+=======
+
+def get_newentries_classicleagues():
+        '''get all past season info for a given player_id'''
+        
+        # send GET request to
+        # https://fantasy.premierleague.com/api/element-summary/{PID}/
+        r = requests.get(
+                base_url + 'leagues-classic/188305/standings'
+        ).json()
+        
+        # extract 'history_past' data from response into dataframe
+        return r
+
+
+
+def get_gw_history():
+
+    players=Teams.objects.all()
+    for player in players:
+        player_id=player.entry
+            
+        '''get all past season info for a given player_id'''
+        
+        # send GET request to
+        # https://fantasy.premierleague.com/api/element-summary/{PID}/
+        r = requests.get(
+                base_url + 'entry/' + str(player_id) + '/history/'
+        ).json()
+
+        print(r)
+        # extract 'history_past' data from response into dataframe
+        for gw in r['current']:
+            gameweeek=gw['event']
+            points=gw['points']
+            point_on_bench=gw['points_on_bench']
+            totalpoints=gw['total_points']
+            inbank=gw['bank']
+            bank=inbank/10      
+            value=gw['value']
+            new_value=value/10
+            event_transfers=gw['event_transfers']
+            event_transfers_cost=gw['event_transfers_cost']
+
+        # for gw in r['past']:
+
+        # for chip in r['chips']:
+        #     name=chip['name']
+        #     time=chip['time']
+        #     event=chip['event']
+
+            try:
+                obj=Gameweek.objects.get(no=gameweeek,player__entry=player_id)
+                print(player.name+str(gameweeek)+'Data already exists')
+            except Gameweek.DoesNotExist:
+                gameweek=Gameweek.objects.create(
+                    no=gameweeek,
+                    point=points,
+                    point_on_bench=point_on_bench,
+                    totalpoints=totalpoints,
+                    bank=bank,
+                    value=new_value,
+                    event_transfers=event_transfers,
+                    event_transfers_cost=event_transfers_cost
+                    )
+                player=get_object_or_404(Teams,entry=player_id)
+                gameweek.player=player
+                gameweek.save()
+                # gameweek.player.add(player)
+                print(player.name + "-Gameweek:" + str(gameweeek) + "-"+ str(points))
+
+# get_gw_history()
+
+def get_results(r):
+    for standing in r['standings']['results']:
+            user = get_object_or_404(Teams,entry=standing['entry'])
+            classic_league,created = ClassicLeague.objects.get_or_create(position=standing['rank'],event_total=standing['event_total'], total_points=standing['total'],defaults={'name':user})
+            if not created:
+                classic_league.position =standing['rank']
+                classic_league.event_total=standing['event_total']
+                classic_league.total_points=standing['total']
+                classic_league.save()
+                print("updated")
+        
+
+def get_classic_league():
+    url = "https://fantasy.premierleague.com/api/leagues-classic/188305/standings"
+    r = requests.get(url).json()
+    data=str(r['standings']['has_next'])
+
+    if data == "True":
+        firsturl=url
+        firstpageresult = requests.get(firsturl).json()
+        secondurl="https://fantasy.premierleague.com/api/leagues-classic/188305/standings/?page_standings=2"
+        secondpageresult = requests.get(secondurl).json()
+        get_results(firstpageresult)
+        get_results(secondpageresult)
+    else:
+      get_results(r)
+
+get_classic_league()
+>>>>>>> ec21f938e0a1074ec8fafa46c6955b02c89bbedb
