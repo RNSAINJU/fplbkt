@@ -41,6 +41,8 @@
         </div>
     </section>
 
+
+
     <section class=about style="background-color:rgba(0, 0, 0, 0.9) !important;">
         <div class=container>
             <div class=row><h2 class=heading> <span>Notice</span></h2>
@@ -55,6 +57,21 @@
         </div>
     </section>
     
+    <section class=about style="background-color:rgb(37 32 32 / 90%) !important;">
+        <div class=container>
+            <div class=row>
+                <h2 class=heading> <span style="color:white;" > Gameweek {{ latest_gameweek }} </span><span> Winner</span> </h2>
+
+                <div class=about-wrap >
+                    <div class="tab-content nav-content" >
+                        {% for w in gameweekwinner.name.all %}
+                        <p style="font-size:30px; color:white;">{{ w.name }}</p>
+                        {% endfor %}
+                        <p style="font-size:40px; color:white;">{{ gameweekwinner.points }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class=about>
         <div class=container>
             <div class=row><h2 class=heading>About <span>FPL BHAKTAPUR</span></h2>
